@@ -29,8 +29,7 @@ public class Raytracer {
 		Raytracer rt = new Raytracer(new Image(640,480,2,eye,320,new Vec(0,0,1)), new ObjectList(), a);
 		rt.obj.add(new Sphere(new Vec(0,80,30),30,new Material(new Vec(0,.7,0.7),new Vec(k,k,k), new Vec(0,0.7,0.7),4)));
 		//rt.obj.add(new Sphere(new Vec(30,50,10),10,new Material(new Vec(0.8,0,0),new Vec(k,k,k), new Vec(0.8,0,0),4)));
-		Sphere s = new Sphere(new Vec(0,40,10),10,new Material(new Vec(0,0,0),new Vec(1,1,1), new Vec(0,0,0),4));
-		s.mt.n = 1.5;
+		Sphere s = new Sphere(new Vec(0,40,10),10,new Material(new Vec(0.8,0,0.6),new Vec(k,k,k), new Vec(0.8,0,0.6),4));
 		rt.obj.add(s);
 		rt.obj.add(new Plane(new Ray(new Vec(0,0,0),new Vec(0,0,1)),new Material(new Vec(0,0.8,0),new Vec(0.2,0.2,0.2), new Vec(0,0.8,0),2)));
 		rt.obj.add(new Plane(new Ray(new Vec(0,150,0),new Vec(0,-1,0)),new Material(new Vec(0.7,0,0),new Vec(k,k,k), new Vec(0.7,0,0),2)));
@@ -78,11 +77,11 @@ public class Raytracer {
 			return col;
 		}
 		double rn = r.u.dot(n);
-		Vec rf = rn < 0 ? refract(r.u,n,1,o.mt.n) : refract(r.u,n,o.mt.n,1);
+		//Vec rf = rn < 0 ? refract(r.u,n,1,o.mt.n) : refract(r.u,n,o.mt.n,1);
 		double rfc = rn < 0 ? reflectance(r.u,n,1,o.mt.n) : reflectance(r.u,n,o.mt.n,1);
-		Vec lf = rf.equals(Vec.BLANK) ? Vec.BLANK : trace(new Ray(p,rf),depth+1,alp);
+		//Vec lf = rf.equals(Vec.BLANK) ? Vec.BLANK : trace(new Ray(p,rf),depth+1,alp);
 		col = col.add(lr.mult(o.mt.ks).mult(rfc));
-		col = col.add(lf.mult(o.mt.ks).mult(1-rfc));
+		//col = col.add(lf.mult(o.mt.ks).mult(1-rfc));
 		return col;
 	}
 
